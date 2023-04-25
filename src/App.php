@@ -22,7 +22,7 @@ class App{
             echo json_encode($this->data->getMany()); 
         }
         elseif ($this->action == "getOne") {
-            
+            echo json_encode($this->data->getOne());
         }
         elseif ($this->action == "getByDate") {
             

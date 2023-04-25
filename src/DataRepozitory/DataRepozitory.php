@@ -27,7 +27,7 @@ class DataRepozitory
     {
         $result = array();
 
-        $query = pg_query($this->conn, 'SELECT * FROM temperature_value ORDER BY id DESC LIMIT 10');
+        $query = pg_query($this->conn, 'SELECT id, voltage, measurement_date::time FROM temperature_value ORDER BY id DESC LIMIT 10');
 
         while($row = pg_fetch_row($query)){
             array_push($result, array(
@@ -39,9 +39,15 @@ class DataRepozitory
 
         return $result;
     }
-    public function getOne()
+    public function getOne() // метод возвращает одну последнюю запись о вольтаже
     {
         $result = array();
+
+        $query = pg_query($this->conn, "SELECT id, voltage, measurement_date::time FROM temperature_value  ORDER BY id DESC LIMIT 1");
+
+        $row = pg_fetch_all($query);
+
+        return array( "voltage" => $row[1], "date" => $row[2]);
     }
     public function getByDate($date)
     {   
