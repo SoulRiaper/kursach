@@ -18,13 +18,18 @@ class App{
 
     public function run()
     {
-        $data = $this->data->GetTemperatureData();
-
-        foreach ($data as $value) {
-            echo $value . "<br>";
+        if ($this->action == "getMany") {
+            
         }
-        // $this->chartService->Draw();
-        
+        elseif ($this->action == "getOne") {
+            
+        }
+        elseif ($this->action == "getByDate") {
+            
+        }
+        else{
+            
+        }
     }
 }
 ?>
