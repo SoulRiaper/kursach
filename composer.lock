@@ -4,93 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "dd94628bc75e36f5e95d88e551aa3a56",
-    "packages": [
-        {
-            "name": "davefx/phplot",
-            "version": "6.2.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/davefx/PHPlot.git",
-                "reference": "d2e201ecaabb0428116c89cebe281a8f54096450"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/davefx/PHPlot/zipball/d2e201ecaabb0428116c89cebe281a8f54096450",
-                "reference": "d2e201ecaabb0428116c89cebe281a8f54096450",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">5.3.0"
-            },
-            "type": "library",
-            "autoload": {
-                "classmap": [
-                    "phplot/"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "LGPL"
-            ],
-            "description": "PHPlot - Create charts in PHP",
-            "homepage": "http://phplot.sourceforge.net",
-            "keywords": [
-                "chart",
-                "phplot"
-            ],
-            "support": {
-                "issues": "https://github.com/davefx/PHPlot/issues",
-                "source": "https://github.com/davefx/PHPlot/tree/master"
-            },
-            "time": "2016-10-19T07:14:15+00:00"
-        },
-        {
-            "name": "szymach/c-pchart",
-            "version": "1.1.3",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/szymach/c-pchart.git",
-                "reference": "90d2d0a35be7457cbb9c6daa4c3c2b2b61277a34"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/szymach/c-pchart/zipball/90d2d0a35be7457cbb9c6daa4c3c2b2b61277a34",
-                "reference": "90d2d0a35be7457cbb9c6daa4c3c2b2b61277a34",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.3"
-            },
-            "type": "project",
-            "autoload": {
-                "files": [
-                    "src/Resources/data/constants.php"
-                ],
-                "psr-4": {
-                    "CpChart\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "description": "Port of \"pChart\" library into PHP5 standards with composer.phar support.",
-            "homepage": "https://github.com/szymach/c-pchart",
-            "keywords": [
-                "c-pChart",
-                "charts",
-                "composer",
-                "pchart",
-                "statistics"
-            ],
-            "support": {
-                "issues": "https://github.com/szymach/c-pchart/issues",
-                "source": "https://github.com/szymach/c-pchart/tree/master"
-            },
-            "time": "2014-10-26T10:01:11+00:00"
-        }
-    ],
+    "content-hash": "2a37caa39d13be27bf7a6fdc6cb2b2f5",
+    "packages": [],
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "stable",
@@ -99,5 +14,5 @@
     "prefer-lowest": false,
     "platform": [],
     "platform-dev": [],
-    "plugin-api-version": "2.2.0"
+    "plugin-api-version": "2.3.0"
 }

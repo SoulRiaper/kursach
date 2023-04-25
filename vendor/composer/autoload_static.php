@@ -6,18 +6,10 @@ namespace Composer\Autoload;
 
 class ComposerStaticInita6aaa5695be92057df8f39a55d33d14b
 {
-    public static $files = array (
-        '6dcc7fc6910472564e7b11f0b5d852b5' => __DIR__ . '/..' . '/szymach/c-pchart/src/Resources/data/constants.php',
-    );
-
     public static $prefixLengthsPsr4 = array (
         'R' => 
         array (
             'Roman\\PromFront\\' => 16,
-        ),
-        'C' => 
-        array (
-            'CpChart\\' => 8,
         ),
         'A' => 
         array (
@@ -30,10 +22,6 @@ class ComposerStaticInita6aaa5695be92057df8f39a55d33d14b
         array (
             0 => __DIR__ . '/../..' . '/src',
         ),
-        'CpChart\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/szymach/c-pchart/src',
-        ),
         'App\\' => 
         array (
             0 => __DIR__ . '/../..' . '/src',
@@ -42,8 +30,6 @@ class ComposerStaticInita6aaa5695be92057df8f39a55d33d14b
 
     public static $classMap = array (
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
-        'PHPlot' => __DIR__ . '/..' . '/davefx/phplot/phplot/phplot.php',
-        'PHPlot_truecolor' => __DIR__ . '/..' . '/davefx/phplot/phplot/phplot.php',
     );
 
     public static function getInitializer(ClassLoader $loader)

@@ -8,12 +8,12 @@ use App\GraphDrawer\IGraphDrawer;
 class App{
 
     private $data;
-    private $chartService;
+    private $action;
 
-    public function __construct(DataRepozitory $data, IGraphDrawer $chart)
+    public function __construct(DataRepozitory $data, string $action)
     {
         $this->data = $data;
-        $this->chartService = $chart;
+        $this->action = $action;
     }
 
     public function run()

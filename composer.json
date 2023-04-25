@@ -11,9 +11,5 @@
             "name": "SoulRiaper",
             "email": "soulriaper@gmail.com"
         }
-    ],
-    "require": {
-        "davefx/phplot": "^6.2",
-        "szymach/c-pchart": "^1.1"
-    }
+    ]
 }

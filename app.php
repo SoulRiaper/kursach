@@ -11,18 +11,11 @@ require 'vendor/autoload.php';
 use App\App;
 use App\DataRepozitory\DataRepozitory;
 
-
+$action = $_REQUEST['action'];
 
 $app = new App(
     new DataRepozitory(),
-    new GraphDrawer(),
-
+    $action,
 );
 
-try{
-    $app->run();
-}
-catch(Exception $ex){
-    echo $ex->getMessage();
-}
-?>
+
