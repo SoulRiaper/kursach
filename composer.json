@@ -1,0 +1,19 @@
+{
+    "name": "roman/prom_front",
+    "autoload": {
+        "psr-4": {
+            "Roman\\PromFront\\": "src/",
+            "App\\":"src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "SoulRiaper",
+            "email": "soulriaper@gmail.com"
+        }
+    ],
+    "require": {
+        "davefx/phplot": "^6.2",
+        "szymach/c-pchart": "^1.1"
+    }
+}
