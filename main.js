@@ -8,12 +8,11 @@ setInterval(() => {
       getData((json)=>{
             json = JSON.parse(json);
             var date = json.map(obj => obj.date);
-            var voltage = json.map(obj => obj.voltage);
-            alert(date + " " + voltage);
+            var voltage = json.map(obj => obj.voltage).toString();
 
-            if(date != chart.data.labels){
+            if(chart.data.labels.slice(-1).toString() != date.toString()){
                   addData(chart, date, voltage);
-                  removeOne();
+                  removeOne(chart);
             }
       }, 'getOne');
 }, 2000);
