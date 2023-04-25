@@ -1,28 +1,6 @@
-const xValues = [50,60,70,80,90,100,110,120,130,140,150];
-const yValues = [7,8,8,9,9,9,10,11,14,14,15];
-
-const canvaNode = document.getElementById("myChart"); // находим в html элемент графика (у него id = myChart)
-
-chart = new Chart(canvaNode, { // создаем новый элемент Chart.js (библиотека для графиков) и задаем его свойства
-  type: "line",
-  data: {
-    labels: xValues, // массив шкалы
-    datasets: [{
-        label: "Мое чсв", // название графика
-        borderColor: "rgba(0, 255, 200 , 0.3 )",
-        fill: false,
-        data: yValues // задаем массив данных
-    }]
-  },
-  options:{
-    legend:{ // не показывать легенду графиков
-      display: false,
-    }
-  }
+getMany(async (json)=>{
+  await createChart(json);
 });
-
-let xMax = 150;
-let yRand;
 
 function updateData() { // функция добавляет рандомные значения в график
   xMax += 10;
@@ -40,10 +18,51 @@ function addData(chart, label, data) {
   chart.update();
 }
 
-function removeOne(chart) {
-chart.data.labels.shift();
-chart.data.datasets.forEach((dataset)=> {
+function removeOne(chart) { // функция удаляет последнее значение в графике
+  chart.data.labels.shift();
+  chart.data.datasets.forEach((dataset)=> {
   dataset.data.shift();
-})
+  })
 chart.update();
+}
+
+async function getMany(callback) // получение данных из коллбека (from server)
+{
+  let xhr = new XMLHttpRequest();
+  xhr.open("GET", 'app.php?action=getMany', true);
+
+  xhr.onload = function() {
+    let data = xhr.response;
+    return callback(data); // при вызове коллбека можно из аргумента data получить данные запроса
+  }
+  xhr.send();
+}
+
+
+function createChart(json) { // функция , создает новый график
+
+  data =JSON.parse(json).reverse();
+
+  const canvaNode = document.getElementById("myChart"); // находим в html элемент графика (у него id = myChart)
+
+  const xValues = data.map(obj => obj.date);
+  const yValues = data.map(obj => obj.voltage);
+
+  chart = new Chart(canvaNode, { // создаем новый элемент Chart.js (библиотека для графиков) и задаем его свойства
+  type: "line",
+  data: {
+    labels: xValues, // массив шкалы
+    datasets: [{
+        label: "Напряжение", // название графика
+        borderColor: "rgba(0, 255, 200 , 0.3 )",
+        fill: false,
+        data: yValues // задаем массив данных
+    }]
+  },
+  options:{
+    legend:{ // не показывать легенду графиков
+      display: false,
+    },
+  }
+});
 }

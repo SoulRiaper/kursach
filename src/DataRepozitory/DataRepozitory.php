@@ -23,14 +23,29 @@ class DataRepozitory
             }
     }
 
-    public function GetTemperatureData()
+    public function getMany()
     {
         $result = array();
-        $responce = pg_query($this->conn, "SELECT * FROM temperature_value");
-        while($row = pg_fetch_row($responce)){
-            array_push($result , $row[1], $row[2]);
+
+        $query = pg_query($this->conn, 'SELECT * FROM temperature_value ORDER BY id DESC LIMIT 10');
+
+        while($row = pg_fetch_row($query)){
+            array_push($result, array(
+                "voltage" => $row[1],
+                "date" => $row[2],
+
+            ));
         }
+
         return $result;
+    }
+    public function getOne()
+    {
+        $result = array();
+    }
+    public function getByDate($date)
+    {   
+        $result = array();
     }
     public function __destruct()
     {

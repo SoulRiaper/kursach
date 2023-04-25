@@ -19,7 +19,7 @@ class App{
     public function run()
     {
         if ($this->action == "getMany") {
-            
+            echo json_encode($this->data->getMany()); 
         }
         elseif ($this->action == "getOne") {
             
@@ -28,7 +28,7 @@ class App{
             
         }
         else{
-            
+
         }
     }
 }

@@ -18,4 +18,4 @@ $app = new App(
     $action,
 );
 
-
+$app->run();
