@@ -26,7 +26,7 @@ function removeOne(chart) { // функция удаляет последнее 
 chart.update();
 }
 
-async function getMany(callback) // получение данных из коллбека (from server)
+function getMany(callback) // получение данных из коллбека (from server)
 {
   let xhr = new XMLHttpRequest();
   xhr.open("GET", 'app.php?action=getMany', true);
@@ -37,7 +37,6 @@ async function getMany(callback) // получение данных из кол�
   }
   xhr.send();
 }
-
 
 function createChart(json) { // функция , создает новый график
 
@@ -53,7 +52,7 @@ function createChart(json) { // функция , создает новый гр�
   data: {
     labels: xValues, // массив шкалы
     datasets: [{
-        label: "Напряжение", // название графика
+        label: "Напряжение  ", // название графика
         borderColor: "rgba(0, 255, 200 , 0.3 )",
         fill: false,
         data: yValues // задаем массив данных
