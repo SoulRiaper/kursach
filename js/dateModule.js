@@ -13,8 +13,11 @@ $(function() {
                   url: "/app.php?action=getByDate",
                   data: {data: result},
                   success: function (response) {
-                        // console.log(JSON.parse(response));
-                        console.log(response);
+                        let json = JSON.parse(response);
+                        json = json.reverse();
+                        console.log(json);
+                        createChart(json);
+                        // console.log(response);
                   }
             });
       })

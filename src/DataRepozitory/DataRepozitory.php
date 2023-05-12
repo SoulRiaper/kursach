@@ -61,14 +61,22 @@ class DataRepozitory
             $result = $_POST['data'];
 
             if($result['start_date'] != "" && $result['stop_date'] != "" ){
-                  return $result['start_date'];
+                  return $this->fetchDatedData($result['start_date'], $result['stop_date']);
             }
             return ['error' => 'start or stop data doesn`t set'];
       }
 
-      public function fetchDatedData($startDate, $secondDate)
+      public function fetchDatedData($startDate, $stopDate)
       {
+            $result = array();
 
+            $query = pg_query($this->conn, "SELECT voltage, measurement_date::time FROM temperature_value WHERE measurement_date BETWEEN '". $startDate."' and '" . $stopDate."'");
+            $row = pg_fetch_all($query);
+
+            while($row = pg_fetch_row($query)){
+                  $result[] = [ 'voltage' => $row[0], 'date' => $row[1]];
+            }
+            return $result;
       }
 
       public function __destruct()

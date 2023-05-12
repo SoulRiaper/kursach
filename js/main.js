@@ -5,17 +5,17 @@ getDataByAction(async (json) => {
       await createChart(json);
 }, 'getMany');
 
-setInterval(() => {
-      getDataByAction((json)=>{
-            var date = json.map(obj => obj.date);
-            var voltage = json.map(obj => obj.voltage).toString();
+// setInterval(() => {
+//       getDataByAction((json)=>{
+//             var date = json.map(obj => obj.date);
+//             var voltage = json.map(obj => obj.voltage).toString();
 
-            if(chart.data.labels.slice(-1).toString() != date.toString()){
-                  addData(chart, date, voltage);
-                  removeOne(chart);
-            }
-      }, 'getOne');
-}, 5000);
+//             if(chart.data.labels.slice(-1).toString() != date.toString()){
+//                   addData(chart, date, voltage);
+//                   removeOne(chart);
+//             }
+//       }, 'getOne');
+// }, 5000);
 
 
 /* ФУНКЦИИ ДЛЯ ДОБАВЛЕНИЯ НОВОЙ ТОЧКИ, УДАЛЕНИЯ ПЕРВОЙ ТОЧКИ (ЧТОБ НЕ ЗАСОРЯТЬ ГРАФИК ИСПОЛЬЗУЕМ ОБЕ,
@@ -38,7 +38,6 @@ function removeOne(chart) { //
       })
       chart.update();
 }
-
 
 /* функция , создает новый график */
 function createChart(data) {
