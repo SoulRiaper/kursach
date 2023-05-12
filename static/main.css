@@ -1,0 +1,22 @@
+.document-title{
+      text-align: center;
+}
+.container{
+      margin: 40px auto;
+      max-width: 800px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+}
+.dateContainer{
+      display: inline-block;
+      margin: auto auto;
+
+}
+label{
+      font-size: 20px;
+}
+.dateDiv{
+      display: inline-block;
+      margin: 0px 10px;
+}

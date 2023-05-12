@@ -1,13 +1,12 @@
 
 
 /* для изначального поиска данных, формирует нынешний график */
-getData(async (json) => { 
+getDataByAction(async (json) => { 
       await createChart(json);
 }, 'getMany');
 
 setInterval(() => {
-      getData((json)=>{
-            json = JSON.parse(json);
+      getDataByAction((json)=>{
             var date = json.map(obj => obj.date);
             var voltage = json.map(obj => obj.voltage).toString();
 
@@ -16,10 +15,10 @@ setInterval(() => {
                   removeOne(chart);
             }
       }, 'getOne');
-}, 2000);
+}, 5000);
 
 
-/* ФУНКЦИИ ДЛЯ ДОБАВЛЕНИЯ НОВОЙ ТОЧКИ, УДАЛЕНИЯ ПЕРВОЙ ТОЧКИ (ЧТОБ НЕ ЗАСОРЯТЬ ГРАФИК МОЖНО ИСПОЛЬЗОВАТЬ ОБЕ,
+/* ФУНКЦИИ ДЛЯ ДОБАВЛЕНИЯ НОВОЙ ТОЧКИ, УДАЛЕНИЯ ПЕРВОЙ ТОЧКИ (ЧТОБ НЕ ЗАСОРЯТЬ ГРАФИК ИСПОЛЬЗУЕМ ОБЕ,
  ТАКИМ ОБРАЗОМ КОЛЛИЧЕСТВО ТОЧЕК ВСЕГДА БУДЕТ ОДИНАКОВЫМ) */
 
 /*  добавляет новое значение к выбранному графику */
@@ -40,23 +39,13 @@ function removeOne(chart) { //
       chart.update();
 }
 
-/* получение данных из коллбека (from server) action это точки доступа к серверу  */
-function getData(callback, action)
-{
-      let xhr = new XMLHttpRequest();
-      xhr.open("GET", 'app.php?action=' + action, true);
-
-      xhr.onload = function () {
-            let data = xhr.response;
-            return callback(data); // при вызове коллбека можно из аргумента data получить данные запроса
-      }
-      xhr.send();
-}
 
 /* функция , создает новый график */
-function createChart(json) {
+function createChart(data) {
 
-      data = JSON.parse(json).reverse();
+      data = data.reverse();
+
+      console.log(data)
 
       const canvaNode = document.getElementById("myChart"); // находит в html элемент графика
 
@@ -76,8 +65,25 @@ function createChart(json) {
             },
             options: {
                   legend: { // показывать легенду графиков
-                        display: false,
+                        display: true,
                   },
             }
       });
 }
+
+
+/* AJAX Methods */
+/* получение данных из коллбека (from server) action это точки доступа к серверу  */
+function getDataByAction(callback, action){
+
+      $.ajax({
+            type: "GET",
+            url: "/app.php?action=" + action,
+            data: "data",
+            dataType: "json",
+            success: function (data) {
+                  return callback(data);
+            }
+      });
+}
+

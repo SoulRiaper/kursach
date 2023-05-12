@@ -1,20 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta charset="UTF-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link rel="stylesheet" href="static/main.css">
+      <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
+      </script>
 
-    <script
-    src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
-    </script>
+
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 
    
-    <title>Document</title>
+      <title>Document</title>
 </head>
 <body>
-    
-    <canvas id="myChart" style="width:100%;max-width:900px;margin:auto"></canvas>
-    <script src="main.js"></script>
+      <!-- chart initialization  -->
+      <h1 class="document-title">Система измерения параметров</h1>
+      <canvas id="myChart" style="width:100%;max-width:900px;margin:auto"></canvas>
+
+      <!--  control buttons inputs  -->
+      <div class="container">
+            <div class="dateContainer">
+                  <div class="dateDiv">
+                        <label for="startDate">Стартовая дата: </label>
+                        <input type="date" id="startDate" name="startDate">
+                  </div>
+                  <div class="dateDiv">
+                        <label for="stopDate">Дата окончания: </label>
+                        <input type="date" id="stopDate" name="stopDate">
+                  </div>
+                  <div class="dateDiv"><button class="submitDate" id="submitDate">Показать данные за период</button></div>
+            </div>
+      </div>
+
+      <!-- connecting scripts -->
+      <script src="main.js"></script>
+      <script src="dateModule.js"></script>
 </body>
 </html>
