@@ -1,4 +1,4 @@
-
+var chart;
 
 /* для изначального поиска данных, формирует нынешний график */
 getDataByAction(async (json) => { 
@@ -44,14 +44,14 @@ function createChart(data) {
 
       data = data.reverse();
 
-      console.log(data)
-
       const canvaNode = document.getElementById("myChart"); // находит в html элемент графика
 
       const xValues = data.map(obj => obj.date);
       const yValues = data.map(obj => obj.voltage);
 
-      chart = new Chart(canvaNode, { // создает новый элемент Chart.js
+      new Chart(canvaNode).destroy(); //TODO: костыль, удаляет уже имеющийся график чтоб отрисовать новый, надо исправить
+
+      this.chart = new Chart(canvaNode, {
             type: "line",
             data: {
                   labels: xValues, // массив шкалы x
@@ -62,8 +62,8 @@ function createChart(data) {
                         data: yValues //массив данных y
                   }]
             },
-            options: {
-                  legend: { // показывать легенду графиков
+            options: { // опции отображения
+                  legend: { 
                         display: true,
                   },
             }
@@ -85,4 +85,28 @@ function getDataByAction(callback, action){
             }
       });
 }
+
+// отправляет запрос на сервер (две даты) и формирует новый график по ним
+$(function() {
+      $('#submitDate').on('click', function () {
+            let result ={
+                  start_date: $('#startDate').val(),
+                  stop_date: $('#stopDate').val(),
+
+            };
+
+            $.ajax({
+                  type: "POST",
+                  url: "/app.php?action=getByDate",
+                  data: {data: result},
+                  success: function (response) {
+                        let json = JSON.parse(response);
+                        json = json.reverse();
+
+                        createChart(json);
+                  }
+            });
+            
+      })
+})
 
