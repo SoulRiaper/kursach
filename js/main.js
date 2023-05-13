@@ -42,6 +42,8 @@ function removeOne(chart) { //
 /* функция , создает новый график */
 function createChart(data) {
 
+      resetCanvas();
+
       data = data.reverse();
 
       const canvaNode = document.getElementById("myChart"); // находит в html элемент графика
@@ -49,7 +51,7 @@ function createChart(data) {
       const xValues = data.map(obj => obj.date);
       const yValues = data.map(obj => obj.voltage);
 
-      new Chart(canvaNode).destroy(); //TODO: костыль, удаляет уже имеющийся график чтоб отрисовать новый, надо исправить
+
 
       this.chart = new Chart(canvaNode, {
             type: "line",
@@ -110,3 +112,9 @@ $(function() {
       })
 })
 
+//перезагружает элемент графика
+var resetCanvas = function(){
+  $('#myChart').remove();
+  $('.chartjs-size-monitor').remove();
+  $('.canvasContainer').append('<canvas id="myChart" style="width:100%;max-width:900px;margin:auto"></canvas>');
+}
