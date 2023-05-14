@@ -28,8 +28,19 @@ class App
             elseif ($this->action == "getByDate") {
                   echo json_encode($this->data->getByDate());
             }
+            elseif ($this->action == "getPhpInfo") {
+                  echo json_encode([
+                        'php_version' => phpversion(),
+                        'php_server' => $_SERVER['SERVER_SOFTWARE'],
+                        
+                  ]);
+            }
+            elseif($this->action == "getDateIntervals"){
+                  echo json_encode($this->data->getDateIntervals());
+            }
             else{
-
+                  http_response_code(500);
+                  echo json_encode(['message' => 'bad request']);
             }
       }
 }

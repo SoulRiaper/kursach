@@ -25,18 +25,31 @@
       <!--  control buttons inputs  -->
       <div class="container">
             <div class="dateContainer">
+
                   <div class="dateDiv">
                         <label for="startDate">Стартовая дата: </label>
                         <input type="date" id="startDate" name="startDate">
                   </div>
+
                   <div class="dateDiv">
                         <label for="stopDate">Дата окончания: </label>
                         <input type="date" id="stopDate" name="stopDate">
                   </div>
+                  
                   <div class="dateDiv"><button class="submitDate" id="submitDate">Показать данные за период</button></div>
             </div>
       </div>
 
+      <footer>
+            <div class="footerContainer">
+                  <div class="versionContainer">
+                        <h3>PHP Version: </h3><p class="versionText" id="phpVersion"></p>
+                  </div>
+                  <div class="versionContainer">
+                        <h3>Server Version: </h3><p class="versionText" id="serverVersion"></p>
+                  </div>
+            </div>
+      </footer>
       <!-- connecting scripts -->
       <script src="js/main.js"></script>
 </body>

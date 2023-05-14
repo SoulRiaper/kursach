@@ -110,11 +110,19 @@ $(function() {
             });
             
       })
+      fetchVersionData();
 })
 
-//перезагружает элемент графика
+//ПЕРЕЗАГРУЖАЕТ ЭЛЕМЕНТ ГРАФИКА
 var resetCanvas = function(){
-  $('#myChart').remove();
-  $('.chartjs-size-monitor').remove();
-  $('.canvasContainer').append('<canvas id="myChart" style="width:100%;max-width:900px;margin:auto"></canvas>');
+      $('#myChart').remove();
+      $('.chartjs-size-monitor').remove();
+      $('.canvasContainer').append('<canvas id="myChart" style="width:100%;max-width:900px;margin:auto"></canvas>');
+}
+
+function fetchVersionData() {
+      getDataByAction((json)=>{
+            $('#phpVersion').text(json.php_version);
+            $('#serverVersion').text(json.php_server);
+      }, 'getPhpInfo')
 }

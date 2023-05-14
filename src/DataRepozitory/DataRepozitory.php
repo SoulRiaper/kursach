@@ -33,7 +33,7 @@ class DataRepozitory
                   array_push($result, array(
                   "voltage" => $row[1],
                   "date" => $row[2],
-
+                  
                   ));
             }
 
@@ -48,10 +48,11 @@ class DataRepozitory
             $row = pg_fetch_all($query);
 
             while($row = pg_fetch_row($query)){
-                  array_push($result, array(
-                  "voltage" => $row[1],
-                  "date" => $row[2]
-                  ));
+                  $result[] =[
+                        "voltage" => $row[1],
+                        "date" => $row[2],
+
+                  ];
             }
             return $result;
       }
@@ -64,6 +65,11 @@ class DataRepozitory
                   return $this->fetchDatedData($result['start_date'], $result['stop_date']);
             }
             return ['error' => 'start or stop data doesn`t set'];
+      }
+
+      public function getDateIntervals()
+      {
+            
       }
 
       public function fetchDatedData($startDate, $stopDate)
