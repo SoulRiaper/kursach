@@ -1,27 +1,17 @@
+
 var chart;
 
-/* для изначального поиска данных, формирует нынешний график */
-getDataByAction(async (json) => {
-      await createChart(json);
-}, 'getMany');
+startProgram();
 
-fetchVersionData();
-setDateIntervals();
-getDbConf();
+async function startProgram() {
+      await fetchVersionData();
+      await getDbConf();
+      await setDateIntervals();
+      await monitorLatestGraph();
 
-//TODO: разобраться как остановить set interval
+}
 
-// setInterval(() => {
-//       getDataByAction((json)=>{
-//             var date = json.map(obj => obj.date);
-//             var voltage = json.map(obj => obj.voltage).toString();
-
-//             if(chart.data.labels.slice(-1).toString() != date.toString()){
-//                   addData(chart, date, voltage);
-//                   removeOne(chart);
-//             }
-//       }, 'getOne');
-// }, 5000);
+var timer = setInterval(monitorLatestValue, 3000);
 
 
 /* ФУНКЦИИ ДЛЯ ДОБАВЛЕНИЯ НОВОЙ ТОЧКИ, УДАЛЕНИЯ ПЕРВОЙ ТОЧКИ (ЧТОБ НЕ ЗАСОРЯТЬ ГРАФИК ИСПОЛЬЗУЕМ ОБЕ,
@@ -36,6 +26,25 @@ getDbConf();
       chart.update();
 }
 
+async function monitorLatestValue() {
+      getDataByAction((json)=>{
+            var date = json.map(obj => obj.date);
+            var voltage = json.map(obj => obj.voltage).toString();
+
+            if(chart.data.labels.slice(-1).toString() != date.toString()){
+                  addData(chart, date, voltage);
+
+                  removeOne(chart);
+            }
+      }, 'getOne');
+}
+
+/* формирует стартовый график */
+async function monitorLatestGraph(){
+      getDataByAction(async (json) => {
+            await createChart(json);
+      }, 'getMany');
+}
 /* функция удаляет последнее значение в графике */
 function removeOne(chart) {
       chart.data.labels.shift();
@@ -102,9 +111,9 @@ function createChart(data) {
 
 /* AJAX Methods */
 /* получение данных из коллбека (from server) action это точки доступа к серверу  */
-function getDataByAction(callback, action){
+async function getDataByAction(callback, action){
 
-      $.ajax({
+      await $.ajax({
             type: "GET",
             url: "/app.php?action=" + action,
             data: "data",
@@ -125,6 +134,7 @@ $(async function() {
 
             };
 
+            clearInterval(timer);
             $.ajax({
                   type: "POST",
                   url: "/app.php?action=getByDate",
@@ -139,6 +149,12 @@ $(async function() {
             
       })
 
+      await $('#getRealTime').on('click', function(){
+            monitorLatestGraph();
+            timer = setInterval(monitorLatestValue, 3000);
+      })
+
+
 })
 
 //ПЕРЕЗАГРУЖАЕТ ЭЛЕМЕНТ ГРАФИКА
@@ -148,7 +164,7 @@ var resetCanvas = function(){
       $('.canvasContainer').append('<canvas id="myChart" style="width:100%;max-width:900px;margin:auto"></canvas>');
 }
 
-function fetchVersionData() {
+async function fetchVersionData() {
       getDataByAction((json)=>{
             $('#phpVersion').text(json.php_version);
             $('#serverVersion').text(json.php_server);
@@ -162,8 +178,10 @@ function setDateIntervals() {
       }, 'getDateIntervals' )
 }
 
-function getDbConf() {
-      getDataByAction((json)=>{
-            console.log(json);
+async function getDbConf() {
+      await getDataByAction((json)=>{
+            $('#dbHostText').text(json.host);
+            $('#dbUserText').text(json.user);
+            $('#dbNameText').text(json.dbname);
       }, "getDbConf");
 }

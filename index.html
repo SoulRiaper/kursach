@@ -37,16 +37,30 @@
                   </div>
                   
                   <div class="dateDiv"><button class="submitDate" id="submitDate">Показать данные за период</button></div>
+                  <div class="dateDiv btn-getBack"><button class="btn" id="getRealTime">Показать последние данные</button></div>
             </div>
       </div>
 
       <footer>
             <div class="footerContainer">
                   <div class="versionContainer">
-                        <h3>PHP Version: </h3><p class="versionText" id="phpVersion"></p>
+                        <div class="versionItem">
+                              <h3>PHP Version: <span class="versionText" id="phpVersion"></span></h3>
+                        </div>
+                        <div class="versionItem">
+                              <h3>Server Version: <span class="versionText" id="serverVersion"></span></h3>
+                        </div>
                   </div>
-                  <div class="versionContainer">
-                        <h3>Server Version: </h3><p class="versionText" id="serverVersion"></p>
+                  <div class="dbInfoContainer versionContainer">
+                        <div class="dbInfoItem" id="dbHostInfo">
+                              <h3>HOST: <span class="versionText" id="dbHostText"></span></h3>
+                        </div>
+                        <div class="dbInfoItem" id="dbUserInfo">
+                              <h3>Data base USER: <span class="versionText" id="dbUserText"></span></h3>
+                        </div>
+                        <div class="dbInfoItem" id="dbNameInfo">
+                              <h3>Data base NAME: <span class="versionText" id="dbNameText"></span></h3>
+                        </div>
                   </div>
             </div>
       </footer>

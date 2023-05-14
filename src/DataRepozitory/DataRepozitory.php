@@ -97,7 +97,9 @@ class DataRepozitory
 
       public function getDbConf()
       {
-            return require 'config.php';
+            $result = require 'config.php';
+            unset($result['pass']);
+            return $result;
       }
 
       public function __destruct()
