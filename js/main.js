@@ -1,9 +1,15 @@
 var chart;
 
 /* для изначального поиска данных, формирует нынешний график */
-getDataByAction(async (json) => { 
+getDataByAction(async (json) => {
       await createChart(json);
 }, 'getMany');
+
+fetchVersionData();
+setDateIntervals();
+getDbConf();
+
+//TODO: разобраться как остановить set interval
 
 // setInterval(() => {
 //       getDataByAction((json)=>{
@@ -31,7 +37,7 @@ getDataByAction(async (json) => {
 }
 
 /* функция удаляет последнее значение в графике */
-function removeOne(chart) { // 
+function removeOne(chart) {
       chart.data.labels.shift();
       chart.data.datasets.forEach((dataset) => {
             dataset.data.shift();
@@ -65,13 +71,34 @@ function createChart(data) {
                   }]
             },
             options: { // опции отображения
+                  scales:{
+                        yAxes:[
+                              {
+                                    scaleLabel:{
+                                          display: true,
+                                          labelString: 'Напряжение U, B'
+                                    },
+                                    ticks:{
+                                          beginAtZero: true,
+                                          max: 10
+                                    }
+                              }
+                        ],
+                        xAxes:[
+                              {
+                                    scaleLabel: {
+                                          display: true,
+                                          labelString: 'Время, t'
+                                    }
+                              }
+                        ]
+                  },
                   legend: { 
                         display: true,
                   },
             }
       });
 }
-
 
 /* AJAX Methods */
 /* получение данных из коллбека (from server) action это точки доступа к серверу  */
@@ -89,8 +116,9 @@ function getDataByAction(callback, action){
 }
 
 // отправляет запрос на сервер (две даты) и формирует новый график по ним
-$(function() {
-      $('#submitDate').on('click', function () {
+$(async function() {
+      
+      await $('#submitDate').on('click', function () {
             let result ={
                   start_date: $('#startDate').val(),
                   stop_date: $('#stopDate').val(),
@@ -110,7 +138,7 @@ $(function() {
             });
             
       })
-      fetchVersionData();
+
 })
 
 //ПЕРЕЗАГРУЖАЕТ ЭЛЕМЕНТ ГРАФИКА
@@ -125,4 +153,17 @@ function fetchVersionData() {
             $('#phpVersion').text(json.php_version);
             $('#serverVersion').text(json.php_server);
       }, 'getPhpInfo')
+}
+
+function setDateIntervals() {
+      getDataByAction((json)=>{
+            $('#startDate').attr({min: json.start_date, max: json.stop_date});
+            $('#stopDate').attr({min: json.start_date, max: json.stop_date});
+      }, 'getDateIntervals' )
+}
+
+function getDbConf() {
+      getDataByAction((json)=>{
+            console.log(json);
+      }, "getDbConf");
 }

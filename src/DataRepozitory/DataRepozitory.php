@@ -45,8 +45,6 @@ class DataRepozitory
 
             $query = pg_query($this->conn, "SELECT id, voltage, measurement_date::time FROM temperature_value  ORDER BY id DESC LIMIT 1");
 
-            $row = pg_fetch_all($query);
-
             while($row = pg_fetch_row($query)){
                   $result[] =[
                         "voltage" => $row[1],
@@ -69,7 +67,19 @@ class DataRepozitory
 
       public function getDateIntervals()
       {
-            
+            $result = [];
+
+            $query = pg_query($this->conn, 'SELECT date(measurement_date) FROM temperature_value  ORDER BY id LIMIT 1');
+            $row = pg_fetch_row($query);
+
+            $result['start_date'] = $row[0];
+
+            $query = pg_query($this->conn, 'SELECT date(measurement_date) FROM temperature_value  ORDER BY id DESC LIMIT 1');
+            $row = pg_fetch_row($query);
+
+            $result['stop_date'] = $row[0];
+
+            return $result;
       }
 
       public function fetchDatedData($startDate, $stopDate)
@@ -83,6 +93,11 @@ class DataRepozitory
                   $result[] = [ 'voltage' => $row[0], 'date' => $row[1]];
             }
             return $result;
+      }
+
+      public function getDbConf()
+      {
+            return require 'config.php';
       }
 
       public function __destruct()

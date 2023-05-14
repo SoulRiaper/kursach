@@ -38,6 +38,9 @@ class App
             elseif($this->action == "getDateIntervals"){
                   echo json_encode($this->data->getDateIntervals());
             }
+            elseif($this->action == "getDbConf"){
+                  echo json_encode($this->data->getDbConf());
+            }
             else{
                   http_response_code(500);
                   echo json_encode(['message' => 'bad request']);
