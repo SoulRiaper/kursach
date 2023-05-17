@@ -1,10 +1,10 @@
 <?php
 
 return array(
-    'host' => 'hattie.db.elephantsql.com',
+    'host' => 'database',
     'port' => '5432',
-    'dbname' => 'mwmvnwtr',
-    'user' => 'mwmvnwtr',
-    'pass' => 'fT7EoxHudEoxOjn6itrsvhPNrBGtmrIK',
+    'dbname' => 'postgres',
+    'user' => 'postgres',
+    'pass' => '1001',
 
 );
